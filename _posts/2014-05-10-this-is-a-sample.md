@@ -3,7 +3,7 @@ layout: post
 title: Post 1
 ---
 
-Blogging is fun!
+Blogging is not fun!
 
 Here's what code looks like with the otter pop theme:
 
