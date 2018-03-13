@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Do not read this
+title: Post 2
 ---
 
 Blogging is fun!
