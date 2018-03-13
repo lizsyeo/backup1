@@ -1,6 +1,6 @@
 ---
 layout: post
-title: First post
+title: Post 1
 ---
 
 Blogging is fun!
