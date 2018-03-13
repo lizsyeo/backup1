@@ -1,6 +1,6 @@
 ---
 layout: post
-title: This is a sample blog post
+title: Post 1
 ---
 
 Blogging is fun!
