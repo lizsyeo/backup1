@@ -9,6 +9,29 @@ Example: <http://tybenz.com>
 
 import pandas as pd
 
+def classify_ppm_ids(file_a, file_d):
+    # Add a 'Type' column to file_a
+    file_a['Type'] = 'Project'
+
+    # Classify 'Parent' and count children
+    parent_ids = file_d['Parent ID'].unique()
+    child_ids = file_d['Child ID'].unique()
+
+    file_a.loc[file_a['PPM ID'].isin(parent_ids), 'Type'] = 'Parent'
+    file_a.loc[file_a['PPM ID'].isin(child_ids), 'Type'] = 'Child'
+    file_a.loc[(file_a['PPM ID'].str.startswith('IDE')) & (file_a['Current Work Status'] == 'Approved'), 'Type'] = 'Prioritized Idea'
+
+    return file_a
+
+file_a = classify_ppm_ids(file_a, file_d)
+
+
+child_count = file_d.groupby('Parent ID').size().reset_index(name='No of Children')
+file_a = file_a.merge(child_count, left_on='PPM ID', right_on='Parent ID', how='left').drop('Parent ID', axis=1)
+file_a['No of Children'] = file_a['No of Children'].fillna(0)
+
+
+
 # Define the function to calculate CP1 score
 def calculate_cp1_score(group):
     total_projects = group[group['Governance Reporting'] == 1].shape[0]
